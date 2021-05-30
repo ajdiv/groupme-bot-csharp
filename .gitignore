@@ -1,0 +1,7 @@
+env
+node_modules/
+dist/
+config/.env
+/.vs/GroupmeBot/v16
+/BotApi/bin/Debug/netcoreapp3.1
+/BotApi/obj
