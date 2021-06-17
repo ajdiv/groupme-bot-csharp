@@ -22,8 +22,8 @@ namespace BotApi.Controllers
         {
             _logger = logger;
         }
-         
-        [HttpGet] 
+
+        [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
@@ -34,6 +34,13 @@ namespace BotApi.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet]
+        [Route("{test}")]
+        public string GetByString(string test)
+        {
+            return test;
         }
     }
 }
