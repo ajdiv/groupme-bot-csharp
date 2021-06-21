@@ -1,4 +1,4 @@
-using GroupmeBot.Models.GroupMe;
+using GroupmeBot.Data.Models.GroupMe;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

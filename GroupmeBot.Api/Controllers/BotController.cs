@@ -1,5 +1,5 @@
-﻿using GroupmeBot.Models.Constants;
-using GroupmeBot.Models.GroupMe;
+﻿using GroupmeBot.Data.Constants;
+using GroupmeBot.Data.Models.GroupMe;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
