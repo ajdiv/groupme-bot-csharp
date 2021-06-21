@@ -22,17 +22,19 @@ namespace GroupmeBot.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // HTTP Clients are meant to be singletons - let .NET Core figure out when to inject them
+            services.AddHttpClient();
+
             // Configure and register "secrets" object 
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
 
             // Inject all services and tools
+            services.AddScoped<IBotTool, BotTool>();
             services.AddScoped<ICommandFactory, CommandFactory>();
             services.AddScoped<ICoolGuyTool, CoolGuyTool>();
 
             // Add ability to parse JSON to C# enums
-            services.AddControllers().AddJsonOptions( x => {
-                x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            });
+            services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
