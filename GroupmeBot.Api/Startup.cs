@@ -1,4 +1,6 @@
+using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Models.GroupMe;
+using GroupmeBot.Data.Tools;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,8 +22,14 @@ namespace GroupmeBot.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure and register "secrets" object 
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
 
+            // Inject all services and tools
+            services.AddScoped<ICommandFactory, CommandFactory>();
+            services.AddScoped<ICoolGuyTool, CoolGuyTool>();
+
+            // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions( x => {
                 x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
