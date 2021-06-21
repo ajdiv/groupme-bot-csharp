@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotApi", "BotApi\BotApi.csproj", "{853537BF-93EC-4196-BD73-29F378DA11A2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{973A5B53-EB76-4879-94CC-5F7FCB91B884}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupmeBot.Models", "GroupmeBot.Models\GroupmeBot.Models.csproj", "{61379F4A-354A-461B-9589-8C5BFADF8BD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupmeBot.Models", "GroupmeBot.Models\GroupmeBot.Models.csproj", "{61379F4A-354A-461B-9589-8C5BFADF8BD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupmeBot.WebHelpers", "GroupmeBot.WebHelpers\GroupmeBot.WebHelpers.csproj", "{D83AA52C-89AE-492E-946B-32F2F4A8B796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupmeBot.WebHelpers", "GroupmeBot.WebHelpers\GroupmeBot.WebHelpers.csproj", "{D83AA52C-89AE-492E-946B-32F2F4A8B796}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroupmeBot.Api", "GroupmeBot.Api\GroupmeBot.Api.csproj", "{3BFBCC20-2AF2-470B-AB42-8BB54C6DC0F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{853537BF-93EC-4196-BD73-29F378DA11A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{853537BF-93EC-4196-BD73-29F378DA11A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{853537BF-93EC-4196-BD73-29F378DA11A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{853537BF-93EC-4196-BD73-29F378DA11A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{61379F4A-354A-461B-9589-8C5BFADF8BD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{61379F4A-354A-461B-9589-8C5BFADF8BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61379F4A-354A-461B-9589-8C5BFADF8BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,6 +28,10 @@ Global
 		{D83AA52C-89AE-492E-946B-32F2F4A8B796}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83AA52C-89AE-492E-946B-32F2F4A8B796}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83AA52C-89AE-492E-946B-32F2F4A8B796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFBCC20-2AF2-470B-AB42-8BB54C6DC0F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFBCC20-2AF2-470B-AB42-8BB54C6DC0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFBCC20-2AF2-470B-AB42-8BB54C6DC0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFBCC20-2AF2-470B-AB42-8BB54C6DC0F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,16 +9,16 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["BotApi/BotApi.csproj", "BotApi/"]
-RUN dotnet restore "BotApi/BotApi.csproj"
+COPY ["GroupmeBot.Api/GroupmeBot.Api.csproj", "GroupmeBot.Api/"]
+RUN dotnet restore "GroupmeBot.Api/GroupmeBot.Api.csproj"
 COPY . .
-WORKDIR "/src/BotApi"
-RUN dotnet build "BotApi.csproj" -c Release -o /app/build
+WORKDIR "/src/GroupmeBot.Api"
+RUN dotnet build "GroupmeBot.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BotApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "GroupmeBot.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BotApi.dll"]
+ENTRYPOINT ["dotnet", "GroupmeBot.Api.dll"]

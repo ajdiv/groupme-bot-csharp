@@ -7,7 +7,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace BotApi.Controllers
+namespace GroupmeBot.Api.Controllers
 {
     [ApiController]
     [Route("bot")]

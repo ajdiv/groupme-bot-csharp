@@ -1,6 +1,6 @@
 using System;
 
-namespace BotApi
+namespace GroupmeBot.Api
 {
     public class WeatherForecast
     {

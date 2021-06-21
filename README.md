@@ -42,7 +42,7 @@ Deployment of your Docker image depends on where you are hosting the code.
 If you are deploying to Heroku: https://heroku-app-name.herokuapp.com/
 
 ## Setting User Secrets <a name="using-secrets"></a>
-Currently the BotApi project is using the .Net Core secret management system. To access the secrets and replace with your own, right click the project and select "Manage User Secrets".
+Currently the GroupmeBot.Api project is using the .Net Core secret management system. To access the secrets and replace with your own, right click the project and select "Manage User Secrets".
 Secrets user file should be formatted per the folloring:
 ```
 {

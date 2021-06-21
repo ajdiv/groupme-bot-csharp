@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 
-namespace BotApi
+namespace GroupmeBot.Api
 {
     public class Startup
     {
