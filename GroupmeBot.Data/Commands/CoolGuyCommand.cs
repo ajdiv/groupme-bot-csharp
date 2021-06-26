@@ -18,9 +18,10 @@ namespace GroupmeBot.Data.Commands
             _coolGuyTool = tool;
         }
 
-        public override void Execute()
+        public override string Execute()
         {
-            throw new System.NotImplementedException();
+            var result = _coolGuyTool.GetRandomFace();
+            return result;
         }
     }
 }

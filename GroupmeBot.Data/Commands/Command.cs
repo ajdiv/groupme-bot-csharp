@@ -8,6 +8,6 @@ namespace GroupmeBot.Data.Commands
         public abstract CommandMessageLocations CommandMessageLocation { get; }
         public abstract string HelpText { get; }
 
-        public abstract void Execute();
+        public abstract string Execute();
     }
 }

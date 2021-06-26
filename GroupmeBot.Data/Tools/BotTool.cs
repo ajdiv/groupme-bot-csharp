@@ -27,12 +27,20 @@ namespace GroupmeBot.Data.Tools
         {
             if (message.SenderType == GroupmeSenderType.User)
             {
-                var hi = _cmdFactory.GetCommand(message.Text);
-                var returnMsg = new StringContent(@$"{{""bot_id"":""{_botDetails.BotApiKey}"",""text"":""YOU SAID {message.Text}""}}", System.Text.Encoding.UTF8, "application/json");
+                var command = _cmdFactory.GetCommand(message.Text);
+                var results = command.Execute();
+
+                var returnMsg = BuildTextResponse(results);
 
                 var httpClient = _httpClientFactory.CreateClient();
-                var response = await httpClient.PostAsync(gmePostAddress, returnMsg);
+                await httpClient.PostAsync(gmePostAddress, returnMsg);
             }
+        }
+
+        private StringContent BuildTextResponse(string text)
+        {
+            var results = new StringContent(@$"{{""bot_id"":""{_botDetails.BotApiKey}"",""text"":""{text}""}}", System.Text.Encoding.UTF8, "application/json");
+            return results;
         }
     }
 }

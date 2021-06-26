@@ -2,5 +2,6 @@
 {
     public interface ICoolGuyTool
     {
+        public string GetRandomFace();
     }
 }
