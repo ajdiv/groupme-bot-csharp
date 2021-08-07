@@ -1,5 +1,7 @@
 ﻿using GroupmeBot.Data.Constants;
+using GroupmeBot.Data.Models.GroupMe;
 using GroupmeBot.Data.Tools;
+using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
@@ -7,7 +9,7 @@ namespace GroupmeBot.Data.Commands
     {
         private readonly ICoolGuyTool _coolGuyTool;
 
-        public override string[] CommandTextTriggers {  get => new string[] { "/coolguy", "/cool guy" }; }
+        public override string[] CommandTextTriggers { get => new string[] { "/coolguy", "/cool guy" }; }
 
         public override CommandMessageLocations CommandMessageLocation { get => CommandMessageLocations.Start; }
 
@@ -18,10 +20,11 @@ namespace GroupmeBot.Data.Commands
             _coolGuyTool = tool;
         }
 
-        public override string Execute()
+        public override Task<GroupmeBotResponseModel> Execute()
         {
-            var result = _coolGuyTool.GetRandomFace();
-            return result;
+            var face = _coolGuyTool.GetRandomFace();
+            var result = new GroupmeBotResponseModel() { Text = face };
+            return Task.FromResult(result);
         }
     }
 }

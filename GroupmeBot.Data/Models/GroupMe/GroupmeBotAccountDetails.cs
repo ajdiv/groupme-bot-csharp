@@ -5,6 +5,8 @@
     /// </summary>
     public class GroupmeBotAccountDetails
     {
+        public string AccessToken { get; set; }
         public string BotApiKey { get; set; }
+        public string GroupId { get; set; }
     }
 }

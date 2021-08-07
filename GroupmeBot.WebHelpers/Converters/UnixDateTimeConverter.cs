@@ -4,11 +4,18 @@ using System.Text.Json.Serialization;
 
 namespace GroupmeBot.WebHelpers.Converters
 {
-    public class DateTimeConverter : JsonConverter<DateTime>
+    public class UnixDateTimeConverter : JsonConverter<DateTime>
     {
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return DateTime.UnixEpoch.AddSeconds(reader.GetInt64());
+            try
+            {
+                return DateTime.UnixEpoch.AddSeconds(reader.GetInt64());
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return DateTime.MinValue;
+            }
         }
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)

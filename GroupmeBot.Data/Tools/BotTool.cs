@@ -1,9 +1,9 @@
 ﻿using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Constants;
 using GroupmeBot.Data.Models.GroupMe;
+using GroupmeBot.WebHelpers.Extensions;
 using Microsoft.Extensions.Options;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Tools
@@ -12,35 +12,29 @@ namespace GroupmeBot.Data.Tools
     {
         private readonly GroupmeBotAccountDetails _botDetails;
         private readonly ICommandFactory _cmdFactory;
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientWrapper _client;
 
-        private readonly string gmePostAddress = "https://api.groupme.com/v3/bots/post";
+        private readonly string _gmePostAddress = "https://api.groupme.com/v3/bots/post";
 
-        public BotTool(IOptions<GroupmeBotAccountDetails> botDetails, ICommandFactory commandFactory, IHttpClientFactory clientFactory)
+        public BotTool(IOptions<GroupmeBotAccountDetails> botDetails, ICommandFactory commandFactory, IHttpClientWrapper client)
         {
             _botDetails = botDetails.Value ?? throw new ArgumentException(nameof(botDetails));
             _cmdFactory = commandFactory;
-            _httpClientFactory = clientFactory;
+            _client = client;
         }
 
-        public async Task ProcessMessage(GroupmeRequestModel message)
+        public async Task ProcessMessage(GroupmeBotRequestModel message)
         {
-            if (message.SenderType == GroupmeSenderType.User)
+            if (message.SenderType == GroupmeSenderType.User && !string.IsNullOrWhiteSpace(message.Text))
             {
-                var command = _cmdFactory.GetCommand(message.Text);
-                var results = command.Execute();
+                var command = _cmdFactory.GetCommand(message.Text.Trim().ToLower());
+                if (command == null) return;
 
-                var returnMsg = BuildTextResponse(results);
+                var results = await command.Execute();
+                results.BotId = _botDetails.BotApiKey;
 
-                var httpClient = _httpClientFactory.CreateClient();
-                await httpClient.PostAsync(gmePostAddress, returnMsg);
+                await _client.Post(_gmePostAddress, results);
             }
-        }
-
-        private StringContent BuildTextResponse(string text)
-        {
-            var results = new StringContent(@$"{{""bot_id"":""{_botDetails.BotApiKey}"",""text"":""{text}""}}", System.Text.Encoding.UTF8, "application/json");
-            return results;
         }
     }
 }

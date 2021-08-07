@@ -5,13 +5,16 @@ using System.Text.Json.Serialization;
 
 namespace GroupmeBot.Data.Models.GroupMe
 {
-    public class GroupmeRequestModel
+    /// <summary>
+    /// Model that gets intercepted by the Groupme Bot
+    /// </summary>
+    public class GroupmeBotRequestModel
     {
         [JsonPropertyName("avatar_url")]
         public string AvatarUrl { get; set; }
 
         [JsonPropertyName("created_at")]
-        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime CreatedAt { get; set; }
 
         [JsonPropertyName("group_id")]

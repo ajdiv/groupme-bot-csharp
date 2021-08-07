@@ -1,4 +1,6 @@
 ﻿using GroupmeBot.Data.Constants;
+using GroupmeBot.Data.Models.GroupMe;
+using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
@@ -8,6 +10,6 @@ namespace GroupmeBot.Data.Commands
         public abstract CommandMessageLocations CommandMessageLocation { get; }
         public abstract string HelpText { get; }
 
-        public abstract string Execute();
+        public abstract Task<GroupmeBotResponseModel> Execute();
     }
 }

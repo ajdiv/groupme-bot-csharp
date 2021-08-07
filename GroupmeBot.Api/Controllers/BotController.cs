@@ -21,14 +21,14 @@ namespace GroupmeBot.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] GroupmeRequestModel message)
+        public async Task<IActionResult> Post([FromBody] GroupmeBotRequestModel message)
         {
             try
             {
                 await _botTool.ProcessMessage(message);
                 return StatusCode(200);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError(e, "Error processing message", message);
                 return StatusCode(500, e);
