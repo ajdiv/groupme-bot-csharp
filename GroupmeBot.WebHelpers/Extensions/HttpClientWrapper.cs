@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace GroupmeBot.WebHelpers.Extensions
 {
@@ -21,9 +24,24 @@ namespace GroupmeBot.WebHelpers.Extensions
             client.DefaultRequestHeaders.Add("X-Access-Token", accessToken);
 
             var response = await client.GetStreamAsync(url);
-            var result = await JsonSerializer.DeserializeAsync<T>(response);
+            try
+            {
+                var result = await JsonSerializer.DeserializeAsync<T>(response);
+                return result;
+            }
+            catch (Exception e)
+            {
+                var hi = 2;
+                throw e;
+            }
+        }
 
-            return result;
+        public async Task<T> Get<T>(string url, string accessToken, object data)
+        {
+            var optionsString = ObjToQueryString(data);
+            url += "?" + optionsString;
+
+            return await Get<T>(url, accessToken);
         }
 
         public async Task Post<T>(string url, T input)
@@ -48,6 +66,18 @@ namespace GroupmeBot.WebHelpers.Extensions
                 var hi = 2;
             }
 
+        }
+
+        private string ObjToQueryString(object obj)
+        {
+            var options = new JsonSerializerOptions() { IgnoreNullValues = true };
+
+            var serialized = JsonSerializer.Serialize(obj, options);
+            var deserializedDict = JsonSerializer.Deserialize<IDictionary<string, object>>(serialized);
+            var step3 = deserializedDict.Select(x => HttpUtility.UrlEncode(x.Key) + "=" + HttpUtility.UrlEncode(x.Value.ToString()));
+
+            var result = string.Join("&", step3);
+            return result;
         }
     }
 }

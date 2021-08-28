@@ -20,6 +20,25 @@ namespace GroupmeBot.Data.Tools
             _client = client;
         }
 
+        public async Task<IList<GroupmeMessageModel>> GetMessages(int limit, string beforeId, string afterId)
+        {
+            if (limit > 100) throw new ArgumentException("Limit must be between 1 and 100");
+
+            var options = new
+            {
+                limit = limit,
+                before_id = beforeId,
+                after_id = afterId
+            };
+
+            var url = _apiUrl + _botDetails.GroupId + "/messages";
+
+            var results = await _client.Get<GroupmeApiResponseModel<GroupmeMessageResponseModel>>(url, _botDetails.AccessToken, options);
+            var messages = results.Response.Messages;
+
+            return messages;
+        }
+
         public async Task<(string, List<int[]>, List<string>)> TagAllMembersInGroup()
         {
             var url = _apiUrl + _botDetails.GroupId;

@@ -1,7 +1,11 @@
-﻿namespace GroupmeBot.Data.Constants
+﻿using System.Text.Json.Serialization;
+
+namespace GroupmeBot.Data.Constants
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum GroupmeSenderType
     {
-        User
+        User,
+        Bot
     }
 }

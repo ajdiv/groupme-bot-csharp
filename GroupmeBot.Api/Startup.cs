@@ -35,6 +35,7 @@ namespace GroupmeBot.Api
             services.AddScoped<IBotTool, BotTool>();
             services.AddScoped<ICoolGuyTool, CoolGuyTool>();
             services.AddScoped<IGroupmeTool, GroupmeTool>();
+            services.AddScoped<IAwardsTool, AwardsTool>();
 
             // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });

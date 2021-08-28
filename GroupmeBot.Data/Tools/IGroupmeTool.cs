@@ -6,9 +6,8 @@ namespace GroupmeBot.Data.Tools
 {
     public interface IGroupmeTool
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        public Task<IList<GroupmeMessageModel>> GetMessages(int limit, string beforeId, string afterId);
+
         /// <returns>
         /// Item 1: Result Text - Item 2: Loci - Item 3: UserIds
         /// </returns>

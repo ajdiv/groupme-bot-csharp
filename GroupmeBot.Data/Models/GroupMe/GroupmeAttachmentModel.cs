@@ -2,9 +2,8 @@
 
 namespace GroupmeBot.Data.Models.GroupMe
 {
-    public abstract class GroupmeAttachmentModel
-
+    public class GroupmeAttachmentModel
     {
-        public abstract GroupmeAttachmentTypes AttachmentType { get; }
+        public virtual GroupmeAttachmentTypes AttachmentType { get; set; }
     }
 }
