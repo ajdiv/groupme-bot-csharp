@@ -31,7 +31,6 @@ namespace GroupmeBot.WebHelpers.Extensions
             }
             catch (Exception e)
             {
-                var hi = 2;
                 throw e;
             }
         }
@@ -63,7 +62,7 @@ namespace GroupmeBot.WebHelpers.Extensions
             }
             catch (Exception e)
             {
-                var hi = 2;
+                throw e;
             }
 
         }

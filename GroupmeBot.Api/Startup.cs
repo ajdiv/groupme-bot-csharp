@@ -1,5 +1,6 @@
 using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Models.GroupMe;
+using GroupmeBot.Data.Models.Thesaurus;
 using GroupmeBot.Data.Tools;
 using GroupmeBot.WebHelpers.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace GroupmeBot.Api
 
             // Configure and register "secrets" object 
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
+            services.Configure<ThesaurusAccountDetails>(Configuration.GetSection("ThesaurusCreds"));
 
             // Inject all services and tools
             services.AddScoped<ICommandFactory, CommandFactory>();
@@ -36,6 +38,7 @@ namespace GroupmeBot.Api
             services.AddScoped<ICoolGuyTool, CoolGuyTool>();
             services.AddScoped<IGroupmeTool, GroupmeTool>();
             services.AddScoped<IAwardsTool, AwardsTool>();
+            services.AddScoped<IThesaurusTool, ThesaurusTool>();
 
             // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
