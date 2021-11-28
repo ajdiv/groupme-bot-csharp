@@ -34,21 +34,5 @@ namespace GroupmeBot.Api.Controllers
                 return StatusCode(500, e);
             }
         }
-
-        [HttpPost]
-        [Route("sendmessage")]
-        public async Task<IActionResult> SendMessage([FromBody] BotPostRequestModel reqModel)
-        {
-            try
-            {
-                await _botTool.ProcessExternalPostRequest(reqModel);
-                return StatusCode(200);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error sending message", reqModel.Text);
-                return StatusCode(500, e);
-            }
-        }
     }
 }

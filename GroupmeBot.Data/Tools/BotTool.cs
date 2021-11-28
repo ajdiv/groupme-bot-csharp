@@ -36,17 +36,10 @@ namespace GroupmeBot.Data.Tools
             }
         }
 
-        public async Task ProcessExternalPostRequest(BotPostRequestModel reqModel)
+        public async Task SendTextMessage(string text)
         {
             var result = new GroupmeBotResponseModel();
-            if (reqModel.EventType == ExternalEventTypes.TwitchStreamStart)
-            {
-                result.Text = $"We are LIVE at https://www.twitch.tv/{reqModel.Text}";
-            }
-            else
-            {
-                result.Text = reqModel.Text;
-            }
+            result.Text = text;
             await SendMessage(result);
         }
 
