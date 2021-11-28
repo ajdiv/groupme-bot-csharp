@@ -31,10 +31,29 @@ namespace GroupmeBot.Data.Tools
                 if (command == null) return;
 
                 var results = await command.Execute();
-                results.BotId = _botDetails.BotApiKey;
 
-                await _client.Post(_gmePostAddress, results);
+                await SendMessage(results);
             }
+        }
+
+        public async Task ProcessExternalPostRequest(BotPostRequestModel reqModel)
+        {
+            var result = new GroupmeBotResponseModel();
+            if (reqModel.EventType == ExternalEventTypes.TwitchStreamStart)
+            {
+                result.Text = $"We are LIVE at https://www.twitch.tv/{reqModel.Text}";
+            }
+            else
+            {
+                result.Text = reqModel.Text;
+            }
+            await SendMessage(result);
+        }
+
+        private async Task SendMessage(GroupmeBotResponseModel model)
+        {
+            model.BotId = _botDetails.BotApiKey;
+            await _client.Post(_gmePostAddress, model);
         }
     }
 }

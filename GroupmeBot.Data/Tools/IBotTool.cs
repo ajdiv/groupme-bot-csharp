@@ -6,5 +6,6 @@ namespace GroupmeBot.Data.Tools
     public interface IBotTool
     {
         Task ProcessMessage(GroupmeBotRequestModel message);
+        Task ProcessExternalPostRequest(BotPostRequestModel reqModel);
     }
 }
