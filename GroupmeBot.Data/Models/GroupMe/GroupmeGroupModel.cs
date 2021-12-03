@@ -33,7 +33,7 @@ namespace GroupmeBot.Data.Models.GroupMe
         public string JoinQuestion { get; set; }
 
         [JsonPropertyName("like_icon")]
-        public string LikeIcon { get; set; }
+        public GroupmeLikeIcon LikeIcon { get; set; }
 
         [JsonPropertyName("max_members")]
         public int MaxMembers { get; set; }
