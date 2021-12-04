@@ -23,7 +23,7 @@ namespace GroupmeBot.Data.Commands
         public override Task<GroupmeBotResponseModel> Execute()
         {
             var face = _coolGuyTool.GetRandomFace();
-            var result = new GroupmeBotResponseModel() { Text = face };
+            var result = new GroupmeBotResponseModel() { Text = face  };
             return Task.FromResult(result);
         }
     }
