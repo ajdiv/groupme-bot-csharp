@@ -14,8 +14,9 @@ namespace GroupmeBot.Data.Tools
 
         public async Task GenerateStreamStartText(TwitchReqModel model)
         {
+            var personWord = model.CurrentViewers == 1 ? "person" : "people";
             var text = $"One of the Boyz is live on Twitch! {model.ChannelName} is playing {model.Game} " +
-                $"for {model.CurrentViewers} people. Support your friend @ {model.ChannelUrl}";
+                $"for {model.CurrentViewers} {personWord}. Support your friend @ {model.ChannelUrl}";
 
             await _botTool.SendTextMessage(text);
         }
