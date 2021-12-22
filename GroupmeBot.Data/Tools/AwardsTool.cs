@@ -81,7 +81,7 @@ namespace GroupmeBot.Data.Tools
                 var likeSuffix = stats.LikeCount == 1 ? "" : "s";
                 var messageSuffix = stats.MessageCount == 1 ? "" : "s";
 
-                likeableResults.Add($"{stats.Nickname} ({stats.LikeCount} like{likeSuffix} in {stats.MessageCount} messages{messageSuffix})");
+                likeableResults.Add($"{stats.Nickname} ({stats.LikeCount} like{likeSuffix} in {stats.MessageCount} message{messageSuffix})");
             }
 
             for (int i = 0; i < likeableResults.Count; i++)
