@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GroupmeBot.Api.Controllers
 {
@@ -34,13 +33,6 @@ namespace GroupmeBot.Api.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-        }
-
-        [HttpGet]
-        [Route("{test}")]
-        public string GetByString(string test)
-        {
-            return test;
         }
     }
 }

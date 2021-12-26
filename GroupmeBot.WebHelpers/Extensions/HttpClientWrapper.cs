@@ -31,7 +31,7 @@ namespace GroupmeBot.WebHelpers.Extensions
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
 
