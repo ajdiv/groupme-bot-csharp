@@ -23,6 +23,9 @@ namespace GroupmeBot.Api
                     var port = Environment.GetEnvironmentVariable("PORT");
                     webBuilder.UseStartup<Startup>()
                     .UseUrls("http://*:" + port);
+                    // Uncomment the following when debugging using docker
+                    // Heroku requires http to be exposed (not https) as it handles it internally
+                    //.UseUrls("https://*:" + port); ;
                 });
     }
 }
