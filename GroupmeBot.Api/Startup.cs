@@ -2,6 +2,8 @@ using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Models.GroupMe;
 using GroupmeBot.Data.Models.Site;
 using GroupmeBot.Data.Models.Thesaurus;
+using GroupmeBot.Data.Mongo;
+using GroupmeBot.Data.Mongo.Repositories;
 using GroupmeBot.Data.Tools;
 using GroupmeBot.WebHelpers.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -42,8 +44,11 @@ namespace GroupmeBot.Api
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
             services.Configure<ThesaurusAccountDetails>(Configuration.GetSection("ThesaurusCreds"));
             services.Configure<SiteDetails>(Configuration.GetSection("SiteCreds"));
+            services.Configure<MongoSettings>(Configuration.GetSection("DatabaseSettings"));
 
             // Inject all services and tools
+            services.AddSingleton<SpewRepository>();
+
             services.AddScoped<ICommandFactory, CommandFactory>();
             services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
             services.AddScoped<IBotTool, BotTool>();
