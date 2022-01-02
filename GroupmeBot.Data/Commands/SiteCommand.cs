@@ -5,25 +5,25 @@ using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
-    public class CoolGuyCommand : Command
+    public class SiteCommand : Command
     {
         private readonly ITextTool _textTool;
 
-        public override string[] CommandTextTriggers { get => new string[] { "/coolguy", "/cool guy" }; }
+        public override string[] CommandTextTriggers { get => new string[] { "/site", "/website", "/url" }; }
 
         public override CommandMessageLocations CommandMessageLocation { get => CommandMessageLocations.Start; }
 
-        public override string HelpText { get => "makes you a cool guy"; }
+        public override string HelpText { get => "boyz homepage"; }
 
-        public CoolGuyCommand(ITextTool tool)
+        public SiteCommand(ITextTool textTool)
         {
-            _textTool = tool;
+            _textTool = textTool;
         }
 
         public override Task<GroupmeBotResponseModel> Execute()
         {
-            var face = _textTool.GetRandomFace();
-            var result = new GroupmeBotResponseModel() { Text = face };
+            var url = _textTool.GetSiteUrl();
+            var result = new GroupmeBotResponseModel() { Text = url };
             return Task.FromResult(result);
         }
     }
