@@ -1,10 +1,14 @@
-﻿using System;
+﻿using GroupmeBot.Data.Models.Site;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 
 namespace GroupmeBot.Data.Tools
 {
-    public class CoolGuyTool : ICoolGuyTool
+    public class TextTool : ITextTool
     {
+        private readonly SiteDetails _siteDetails;
+
         private static readonly Random _random = new Random(); // Static to achieve uniformity in generated numbers
         private readonly List<string> _faceList = new List<string>()
         {
@@ -173,11 +177,21 @@ namespace GroupmeBot.Data.Tools
           "\\_(ʘ_ʘ)_/"
         };
 
+        public TextTool(IOptions<SiteDetails> siteDetails)
+        {
+            _siteDetails = siteDetails.Value ?? throw new ArgumentException(nameof(siteDetails));
+        }
+
         public string GetRandomFace()
         {
             var randomNum = _random.Next(_faceList.Count);
             var result = _faceList[randomNum];
             return result;
+        }
+
+        public string GetSiteUrl()
+        {
+            return _siteDetails.Url;
         }
     }
 }

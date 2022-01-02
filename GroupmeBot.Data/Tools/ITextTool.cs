@@ -1,7 +1,8 @@
 ﻿namespace GroupmeBot.Data.Tools
 {
-    public interface ICoolGuyTool
+    public interface ITextTool
     {
         public string GetRandomFace();
+        public string GetSiteUrl();
     }
 }

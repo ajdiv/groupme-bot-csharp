@@ -1,17 +1,16 @@
 using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Models.GroupMe;
+using GroupmeBot.Data.Models.Site;
 using GroupmeBot.Data.Models.Thesaurus;
 using GroupmeBot.Data.Tools;
 using GroupmeBot.WebHelpers.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.IO;
 using System.Text.Json.Serialization;
 
 namespace GroupmeBot.Api
@@ -42,12 +41,13 @@ namespace GroupmeBot.Api
             // Configure and register "secrets" object 
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
             services.Configure<ThesaurusAccountDetails>(Configuration.GetSection("ThesaurusCreds"));
+            services.Configure<SiteDetails>(Configuration.GetSection("SiteCreds"));
 
             // Inject all services and tools
             services.AddScoped<ICommandFactory, CommandFactory>();
             services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
             services.AddScoped<IBotTool, BotTool>();
-            services.AddScoped<ICoolGuyTool, CoolGuyTool>();
+            services.AddScoped<ITextTool, TextTool>();
             services.AddScoped<IGroupmeTool, GroupmeTool>();
             services.AddScoped<IAwardsTool, AwardsTool>();
             services.AddScoped<IThesaurusTool, ThesaurusTool>();
