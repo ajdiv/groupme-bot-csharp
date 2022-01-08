@@ -1,7 +1,9 @@
-﻿namespace GroupmeBot.Data.Commands
+﻿using System.Threading.Tasks;
+
+namespace GroupmeBot.Data.Commands
 {
     public interface ICommandFactory
     {
-        Command GetCommand(string messageText);
+        Task<Command> GetCommand(string messageText);
     }
 }

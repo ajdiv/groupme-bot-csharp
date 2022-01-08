@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
-    public class ThesaurusCommand : Command
+    public class ThesaurusCommand : ProgrammedCommand
     {
         private readonly IThesaurusTool _thesaurusTool;
 

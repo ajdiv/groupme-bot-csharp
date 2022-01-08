@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
-    public class HereCommand : Command
+    public class HereCommand : ProgrammedCommand
     {
         private readonly IGroupmeTool _gmeTool;
 

@@ -27,7 +27,7 @@ namespace GroupmeBot.Data.Tools
         {
             if (message.SenderType == GroupmeSenderType.User && !string.IsNullOrWhiteSpace(message.Text))
             {
-                var command = _cmdFactory.GetCommand(message.Text.Trim().ToLower());
+                var command = await _cmdFactory.GetCommand(message.Text.Trim().ToLower());
                 if (command == null) return;
 
                 var results = await command.Execute();
