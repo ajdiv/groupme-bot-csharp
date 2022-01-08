@@ -7,6 +7,14 @@ export class CustomCommandsService {
 
   constructor(private http: HttpClient) { }
 
+  createCommand(newCommand: CustomCommand): Observable<void> {
+    return this.http.post<void>('customcommands', newCommand);
+  }
+
+  deleteCommand(id: string): Observable<void> {
+    return this.http.delete<void>('customcommands/' + id);
+  }
+
   getAllCustomCommands(): Observable<CustomCommand[]> {
     return this.http.get<CustomCommand[]>('customcommands');
   }

@@ -50,5 +50,20 @@ namespace GroupmeBot.Api.Controllers
                 return StatusCode(500, e);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                await _customCommandsTool.DeleteCommand(id);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error deleting Custom Command");
+                return StatusCode(500, e);
+            }
+        }
     }
 }

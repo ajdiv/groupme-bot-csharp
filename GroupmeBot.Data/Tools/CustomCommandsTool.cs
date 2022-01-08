@@ -29,6 +29,11 @@ namespace GroupmeBot.Data.Tools
             await _customCommandRepo.Create(newCommand);
         }
 
+        public async Task DeleteCommand(string id)
+        {      
+            await _customCommandRepo.Delete(id);
+        }
+
 
         public async Task<List<CustomCommandModel>> GetAllCustomCommands()
         {

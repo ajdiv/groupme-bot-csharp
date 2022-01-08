@@ -1,6 +1,14 @@
-<div class="page-center fade-in">
-  <h1> HI :) </h1>
-  <div *ngFor="let command of customCommands">
-    <span>ID: {{command.mongoId}}</span>...<span>PROMPT: {{command.commandPrompt}}</span>...<span>RESPONSE: {{command.commandResponse}}</span>
+<div class="text-center fade-in">
+  <h1 class="title"> YOU FOUND ME :) </h1>
+  <div class="command-list">
+    <div *ngFor="let command of customCommands">
+      <span>{{command.commandPrompt}}: {{command.commandResponse}}</span><button (click)="deleteCommand(command.mongoId)">X</button>
+    </div>
+  </div>
+  <div class="command-input">
+    <div>
+      New Command - Prompt: <input type="text" [(ngModel)]="newPrompt" /> Response: <input type="text" [(ngModel)]="newResponse" /> <button (click)="addCommand()"> Submit</button>
+    </div>
   </div>
 </div>
+

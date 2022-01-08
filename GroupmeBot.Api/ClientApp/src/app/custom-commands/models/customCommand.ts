@@ -1,5 +1,5 @@
 interface CustomCommand {
-  mongoId: string;
+  mongoId?: string;
   commandPrompt: string;
   commandResponse: string;
 }
