@@ -36,6 +36,21 @@ namespace GroupmeBot.Api.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] CustomCommandModel requestObj)
+        {
+            try
+            {
+                await _customCommandsTool.EditCommand(requestObj);
+                return StatusCode(200);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error creating Custom Command");
+                return StatusCode(500, e);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CustomCommandModel requestObj)
         {

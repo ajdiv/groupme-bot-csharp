@@ -26,7 +26,8 @@ export class CustomCommandsComponent implements OnInit {
   addCommand(): void {
     const newCommand: CustomCommand = {
       commandPrompt: this.newPrompt,
-      commandResponse: this.newResponse
+      commandResponse: this.newResponse,
+      editing: false
     }
     this.customCommandSvc.createCommand(newCommand).subscribe(
       () => {
@@ -47,6 +48,21 @@ export class CustomCommandsComponent implements OnInit {
         throw err;
       }
     )
+  }
+
+  saveEdit(command: CustomCommand): void {
+    this.customCommandSvc.editCommand(command).subscribe(
+      () => {
+        this.loadCustomCommands();
+      },
+      (err: any) => {
+        throw err;
+      }
+    )
+  }
+
+  toggleEditMode(command: CustomCommand): void {
+    command.editing = !command.editing;
   }
 
   private loadCustomCommands(): void {

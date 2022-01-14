@@ -30,8 +30,20 @@ namespace GroupmeBot.Data.Tools
         }
 
         public async Task DeleteCommand(string id)
-        {      
+        {
             await _customCommandRepo.Delete(id);
+        }
+
+        public async Task EditCommand(CustomCommandModel model)
+        {
+            var dbModel = new CustomCommand()
+            {
+                Id = model.MongoId,
+                CommandPrompt = model.CommandPrompt,
+                CommandResponse = model.CommandResponse
+            };
+
+            await _customCommandRepo.Update(model.MongoId, dbModel);
         }
 
 

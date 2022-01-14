@@ -15,7 +15,7 @@ namespace GroupmeBot.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var port = Environment.GetEnvironmentVariable("PORT");
+                    var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
                     webBuilder.UseStartup<Startup>()
                     .UseUrls("http://*:" + port);
                     // Uncomment the following when debugging using docker

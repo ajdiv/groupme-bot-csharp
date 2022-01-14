@@ -8,6 +8,7 @@ namespace GroupmeBot.Data.Tools
     {
         public Task CreateCommand(CustomCommandModel model);
         public Task DeleteCommand(string id);
+        public Task EditCommand(CustomCommandModel model);
         public Task<List<CustomCommandModel>> GetAllCustomCommands();
     }
 }

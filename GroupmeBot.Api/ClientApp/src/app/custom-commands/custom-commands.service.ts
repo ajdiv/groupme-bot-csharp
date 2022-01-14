@@ -15,6 +15,10 @@ export class CustomCommandsService {
     return this.http.delete<void>('customcommands/' + id);
   }
 
+  editCommand(command: CustomCommand): Observable<void> {
+    return this.http.put<void>('customcommands/', command);
+  }
+
   getAllCustomCommands(): Observable<CustomCommand[]> {
     return this.http.get<CustomCommand[]>('customcommands');
   }
