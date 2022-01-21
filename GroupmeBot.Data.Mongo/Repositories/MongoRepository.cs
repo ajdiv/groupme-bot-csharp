@@ -8,7 +8,7 @@ namespace GroupmeBot.Data.Mongo.Repositories
 {
     public abstract class MongoRepository<T> where T : MongoModel
     {
-        private readonly IMongoCollection<T> _collection;
+        protected readonly IMongoCollection<T> _collection;
 
         public MongoRepository(IOptions<MongoSettings> mongoDbSettings, string collectionName)
         {
