@@ -11,10 +11,10 @@ namespace GroupmeBot.Api.Controllers
     [Route("twitch")]
     public class TwitchController : ControllerBase
     {
-        private readonly ILogger<BotController> _logger;
+        private readonly ILogger<TwitchController> _logger;
         private readonly ITwitchTool _twitchTool;
 
-        public TwitchController(ILogger<BotController> logger, ITwitchTool twitchTool)
+        public TwitchController(ILogger<TwitchController> logger, ITwitchTool twitchTool)
         {
             _logger = logger;
             _twitchTool = twitchTool;

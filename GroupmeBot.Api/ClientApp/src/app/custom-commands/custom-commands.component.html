@@ -1,0 +1,24 @@
+<div class="text-center fade-in">
+  <h1 class="title"> YOU FOUND ME :) </h1>
+  <div class="command-list">
+    <div class="row" *ngFor="let command of customCommands">
+      <ng-container *ngIf="!command.editing; else editingBlock" >
+        <div class="col-6"><span class="text-right">{{command.commandPrompt}}</span>: <span class="text-left">{{command.commandResponse}}</span></div>
+        <button class="col-3" (click)="toggleEditMode(command)">Edit</button>
+        <button class="col-3" (click)="deleteCommand(command.mongoId)">X</button>
+      </ng-container>
+      <ng-template #editingBlock>
+        <div class="col-6"><input type="text" [(ngModel)]="command.commandPrompt" />: <input type="text" [(ngModel)]="command.commandResponse" /></div>
+        <button class="col-3" (click)="saveEdit(command)">Update</button>
+        <button class="col-3" (click)="toggleEditMode(command)">CANCEL</button>
+      </ng-template> 
+
+    </div>
+  </div>
+  <div class="command-input">
+    <div>
+      New Command - Prompt: <input type="text" [(ngModel)]="newPrompt" /> Response: <input type="text" [(ngModel)]="newResponse" /> <button (click)="addCommand()"> Submit</button>
+    </div>
+  </div>
+</div>
+

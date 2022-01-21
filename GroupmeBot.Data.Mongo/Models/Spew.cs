@@ -5,12 +5,8 @@ using System;
 namespace GroupmeBot.Data.Mongo.Models
 {
     [BsonIgnoreExtraElements]
-    public class Spew
+    public class Spew : MongoModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
         [BsonElement("gmeUserId")]
         public int GroupmeUserId { get; set; }
 
