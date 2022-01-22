@@ -22,21 +22,24 @@ namespace GroupmeBot.Data.Tools
         {
             if (!records.Any()) return "No one played yet today";
 
-            var sortedPlays = records.OrderByDescending(x => x.SolvedInAttempts).ToList();
-            var winningAttempt = sortedPlays.First().SolvedInAttempts;
+            var sortedPlays = records.OrderBy(x => x.SolvedInAttempts).ToList();
+            var winningAttempt = sortedPlays.FirstOrDefault(x => x.SolvedInAttempts > 0)?.SolvedInAttempts ?? 0;
 
             var results = "Standings:\n";
-            foreach (var play in sortedPlays)
+            foreach (var play in sortedPlays.Where(x => x.SolvedInAttempts > 0))
             {
-                var player = allUsers.Single(x => x.UserId == play.UserId).Nickname;
-                var winnerEmoji = play.SolvedInAttempts == winningAttempt && winningAttempt > 0 ? "👑" : string.Empty;
-                results += $"{player}{winnerEmoji}: {play.SolvedInAttempts}/6";
+                results += GenerateStandingTextForPlayer(allUsers, play, winningAttempt);
+            }
+
+            foreach (var play in sortedPlays.Where(x => x.SolvedInAttempts == 0))
+            {
+                results += GenerateStandingTextForPlayer(allUsers, play, 0);
             }
 
             var unplayedList = new List<string>();
             var unplayedPlayerIds = allUsers.Select(x => x.UserId).Except(records.Select(x => x.UserId)).ToList();
 
-            results += unplayedPlayerIds.Any() ? "\n\nNot Yet Played:" : string.Empty;
+            results += unplayedPlayerIds.Any() ? "\nNot Yet Played:" : string.Empty;
             foreach (var unplayerId in unplayedPlayerIds)
             {
                 var unplayer = allUsers.Single(x => x.UserId == unplayerId).Nickname;
@@ -67,6 +70,15 @@ namespace GroupmeBot.Data.Tools
 
             await _wordleRecordRepo.Create(wordleRecord);
             return $"{userName}'s Wordle submission is logged!";
+        }
+
+        private string GenerateStandingTextForPlayer(IList<GroupmeUserModel> allUsers, WordleRecord play, int winningAttempt)
+        {
+            var player = allUsers.Single(x => x.UserId == play.UserId).Nickname;
+            var winnerEmoji = play.SolvedInAttempts == winningAttempt && winningAttempt > 0 ? "👑" : string.Empty;
+            var result = $"{player}{winnerEmoji}: {play.SolvedInAttempts}/6\n";
+
+            return result;
         }
     }
 }
