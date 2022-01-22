@@ -29,7 +29,7 @@ namespace GroupmeBot.WebHelpers.Extensions
                 var result = await JsonSerializer.DeserializeAsync<T>(response);
                 return result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -60,14 +60,14 @@ namespace GroupmeBot.WebHelpers.Extensions
 
                 await client.PostAsync(url, results);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
 
         }
 
-        private string ObjToQueryString(object obj)
+        private static string ObjToQueryString(object obj)
         {
             var options = new JsonSerializerOptions() { IgnoreNullValues = true };
 
