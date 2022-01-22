@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GroupmeBot.Data.Mongo\GroupmeBot.Data.Mongo.csproj" />
     <ProjectReference Include="..\GroupmeBot.WebHelpers\GroupmeBot.WebHelpers.csproj" />
   </ItemGroup>
 

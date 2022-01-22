@@ -3,6 +3,7 @@ using GroupmeBot.WebHelpers.Extensions;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Tools
@@ -18,6 +19,15 @@ namespace GroupmeBot.Data.Tools
         {
             _botDetails = botDetails.Value ?? throw new ArgumentException(nameof(botDetails));
             _client = client;
+        }
+
+        public async Task<List<GroupmeUserModel>> GetGroupMembers()
+        {
+            var url = _apiUrl + _botDetails.GroupId;
+            var apiResults = await _client.Get<GroupmeApiResponseModel<GroupmeGroupModel>>(url, _botDetails.AccessToken);
+            var members = apiResults.Response.Members.ToList();
+
+            return members;
         }
 
         public async Task<IList<GroupmeMessageModel>> GetMessages(int limit, string beforeId, string afterId)
@@ -41,11 +51,8 @@ namespace GroupmeBot.Data.Tools
 
         public async Task<(string, List<int[]>, List<string>)> TagAllMembersInGroup()
         {
-            var url = _apiUrl + _botDetails.GroupId;
-            var apiResults = await _client.Get<GroupmeApiResponseModel<GroupmeGroupModel>>(url, _botDetails.AccessToken);
-            var groupDetails = apiResults.Response;
-
-            var results = BuildMentionModel(groupDetails.Members);
+            var members = await GetGroupMembers();
+            var results = BuildMentionModel(members);
 
             return results;
         }

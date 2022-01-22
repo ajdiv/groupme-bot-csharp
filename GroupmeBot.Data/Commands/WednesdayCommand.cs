@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
-    public class WednesdayCommand : Command
+    public class WednesdayCommand : ProgrammedCommand
     {
 
         public override string[] CommandTextTriggers { get => new string[] { "/wed", "/wednesday" }; }

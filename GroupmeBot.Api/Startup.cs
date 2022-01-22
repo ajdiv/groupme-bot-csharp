@@ -2,6 +2,8 @@ using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Models.GroupMe;
 using GroupmeBot.Data.Models.Site;
 using GroupmeBot.Data.Models.Thesaurus;
+using GroupmeBot.Data.Mongo;
+using GroupmeBot.Data.Mongo.Repositories;
 using GroupmeBot.Data.Tools;
 using GroupmeBot.WebHelpers.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -42,8 +44,13 @@ namespace GroupmeBot.Api
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
             services.Configure<ThesaurusAccountDetails>(Configuration.GetSection("ThesaurusCreds"));
             services.Configure<SiteDetails>(Configuration.GetSection("SiteCreds"));
+            services.Configure<MongoSettings>(Configuration.GetSection("DatabaseSettings"));
 
             // Inject all services and tools
+            services.AddSingleton<SpewRepository>();
+            services.AddSingleton<CustomCommandRepository>();
+            services.AddSingleton<WordleRecordRepository>();
+
             services.AddScoped<ICommandFactory, CommandFactory>();
             services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
             services.AddScoped<IBotTool, BotTool>();
@@ -52,6 +59,8 @@ namespace GroupmeBot.Api
             services.AddScoped<IAwardsTool, AwardsTool>();
             services.AddScoped<IThesaurusTool, ThesaurusTool>();
             services.AddScoped<ITwitchTool, TwitchTool>();
+            services.AddScoped<ICustomCommandsTool, CustomCommandsTool>();
+            services.AddScoped<IWordleTool, WordleTool>();
 
             // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
