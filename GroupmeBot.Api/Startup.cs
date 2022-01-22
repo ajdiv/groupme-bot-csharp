@@ -49,6 +49,7 @@ namespace GroupmeBot.Api
             // Inject all services and tools
             services.AddSingleton<SpewRepository>();
             services.AddSingleton<CustomCommandRepository>();
+            services.AddSingleton<WordleRecordRepository>();
 
             services.AddScoped<ICommandFactory, CommandFactory>();
             services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
@@ -59,6 +60,7 @@ namespace GroupmeBot.Api
             services.AddScoped<IThesaurusTool, ThesaurusTool>();
             services.AddScoped<ITwitchTool, TwitchTool>();
             services.AddScoped<ICustomCommandsTool, CustomCommandsTool>();
+            services.AddScoped<IWordleTool, WordleTool>();
 
             // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });

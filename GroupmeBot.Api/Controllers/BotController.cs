@@ -3,6 +3,7 @@ using GroupmeBot.Data.Tools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GroupmeBot.Api.Controllers
@@ -31,6 +32,23 @@ namespace GroupmeBot.Api.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e, "Error processing message", message);
+                return StatusCode(500, e);
+            }
+        }
+
+        [HttpPost]
+        [Route("testinput")]
+        public IActionResult GetSampleGroupmeInput([FromBody] JsonElement rawData)
+        {
+            try
+            {
+                var message = $"Received {JsonSerializer.Serialize(rawData)}";
+                _logger.LogInformation(message);
+                return StatusCode(200, message);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error processing message", rawData);
                 return StatusCode(500, e);
             }
         }
