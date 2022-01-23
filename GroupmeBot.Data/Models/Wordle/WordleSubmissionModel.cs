@@ -13,7 +13,7 @@ namespace GroupmeBot.Data.Models.Wordle
 
             var textArr = input.Trim().ToLower().Split(' ');
 
-            if (textArr.Length != 3) return false;
+            if (textArr.Length < 3) return false;
 
             var validSubmissionDay = int.TryParse(textArr[1], out int submissionDay);
             var possibleFraction = ExtractFractionFromFinalSegment(textArr[2]);
