@@ -76,7 +76,7 @@ namespace GroupmeBot.Data.Tools
         {
             var player = allUsers.Single(x => x.UserId == play.UserId).Nickname;
             var winnerEmoji = play.SolvedInAttempts == winningAttempt && winningAttempt > 0 ? "👑" : string.Empty;
-            var result = $"{player}{winnerEmoji}: {play.SolvedInAttempts}/6\n";
+            var result = $"{winnerEmoji}{player}: {play.SolvedInAttempts}/6\n";
 
             return result;
         }
