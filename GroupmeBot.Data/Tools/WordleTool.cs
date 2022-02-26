@@ -69,7 +69,8 @@ namespace GroupmeBot.Data.Tools
             };
 
             await _wordleRecordRepo.Create(wordleRecord);
-            return $"{userName}'s Wordle submission is logged!";
+            var hardModeText = submission.IsHardMode ? " (Hard Mode) " : " ";
+            return $"{userName}'s{hardModeText}Wordle submission is logged!";
         }
 
         private string GenerateStandingTextForPlayer(IList<GroupmeUserModel> allUsers, WordleRecord play, int winningAttempt)

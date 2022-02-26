@@ -1,11 +1,10 @@
-﻿using System.Text.RegularExpressions;
-
-namespace GroupmeBot.Data.Models.Wordle
+﻿namespace GroupmeBot.Data.Models.Wordle
 {
     public class WordleSubmissionModel
     {
         public int SolvedInAttempts { get; set; }
         public int SubmissionDayNum { get; set; }
+        public bool IsHardMode { get; set; }
 
         public static bool TryParse(string input, out WordleSubmissionModel result)
         {
@@ -22,11 +21,13 @@ namespace GroupmeBot.Data.Models.Wordle
             if (textArr[0] != "wordle" || !validSubmissionDay || !isFraction) return false;
 
             var isSolved = int.TryParse(possibleFraction.Substring(0, possibleFraction.IndexOf('/')), out int numAttempts);
+            var isHardMode = possibleFraction.Length > 3 && possibleFraction[3] == '*';
 
             result = new WordleSubmissionModel()
             {
                 SolvedInAttempts = isSolved ? numAttempts : 0,
-                SubmissionDayNum = submissionDay
+                SubmissionDayNum = submissionDay,
+                IsHardMode = isHardMode
             };
 
             return true;
@@ -42,10 +43,11 @@ namespace GroupmeBot.Data.Models.Wordle
 
         private static bool StringIsFraction(string input)
         {
-            var pattern = @"^\d+(\/\d+)$";
-            var isValidFraction = Regex.IsMatch(input, pattern);
-            var isFailedAttempt = input.StartsWith("x/");
-            return isValidFraction || isFailedAttempt;
+            var validFirstChar = (char.GetNumericValue(input, 0) >= 1 && char.GetNumericValue(input, 0) <= 6) || input[0] == 'x';
+            var validSecondChar = input[1] == '/';
+            var validThirdChar = char.GetNumericValue(input, 2) == 6;
+
+            return validFirstChar && validSecondChar && validThirdChar;
         }
 
     }
