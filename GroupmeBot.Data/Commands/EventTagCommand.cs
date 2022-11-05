@@ -1,27 +1,27 @@
-﻿using GroupmeBot.Data.Constants;
-using GroupmeBot.Data.Models.GroupMe;
+﻿using GroupmeBot.Data.Models.GroupMe;
 using GroupmeBot.Data.Tools;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
-    public class HereCommand : ProgrammedCommand
+    public class EventTagCommand : Command
     {
+        public IList<string> MembersToTag { get; set; }
+
+        private readonly EventGroupFinderTool _eventGroupFinderTool;
         private readonly GroupmeTool _gmeTool;
 
-        public override string[] CommandTextTriggers { get => new string[] { "@here", "@all" }; }
-
-        public override CommandMessageLocations CommandMessageLocation { get => CommandMessageLocations.Contains; }
-
-        public override string HelpText { get => "notifies everyone in the group, regardless of their mute settings"; }
-
-        public HereCommand(GroupmeTool gmeTool)
+        public EventTagCommand(GroupmeTool gmeTool, EventGroupFinderTool eventGroupFinderTool)
         {
+            _eventGroupFinderTool = eventGroupFinderTool;
             _gmeTool = gmeTool;
         }
 
         public override async Task<GroupmeBotResponseModel> Execute()
         {
+            var membersToTag = await _eventGroupFinderTool.TryGetMembersOfEvent(text);
+
             var tagProperties = await _gmeTool.TagAllMembersInGroup();
             var mentionsModel = new GroupmeMentionsModel()
             {

@@ -73,7 +73,8 @@ namespace GroupmeBot.WebHelpers.Extensions
 
             var serialized = JsonSerializer.Serialize(obj, options);
             var deserializedDict = JsonSerializer.Deserialize<IDictionary<string, object>>(serialized);
-            var step3 = deserializedDict.Select(x => HttpUtility.UrlEncode(x.Key) + "=" + HttpUtility.UrlEncode(x.Value.ToString()));
+            var step3 = deserializedDict.Select(x => x.Key + "=" + x.Value.ToString());
+            //var step3 = deserializedDict.Select(x => HttpUtility.UrlEncode(x.Key) + "=" + HttpUtility.UrlEncode(x.Value.ToString()));
 
             var result = string.Join("&", step3);
             return result;

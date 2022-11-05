@@ -7,7 +7,7 @@ namespace GroupmeBot.Data.Commands
 {
     public class WordleCommand : ProgrammedCommand
     {
-        private readonly IGroupmeTool _gmeTool;
+        private readonly GroupmeTool _gmeTool;
         private readonly IWordleTool _wordleTool;
 
         public override string[] CommandTextTriggers { get => new string[] { "/wordle" }; }
@@ -16,7 +16,7 @@ namespace GroupmeBot.Data.Commands
 
         public override string HelpText { get => "Returns wordle stats"; }
 
-        public WordleCommand(IGroupmeTool gmeTool, IWordleTool wordleTool)
+        public WordleCommand(GroupmeTool gmeTool, IWordleTool wordleTool)
         {
             _gmeTool = gmeTool;
             _wordleTool = wordleTool;

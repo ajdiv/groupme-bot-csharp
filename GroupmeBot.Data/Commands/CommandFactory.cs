@@ -13,11 +13,13 @@ namespace GroupmeBot.Data.Commands
     {
         private readonly IServiceProvider _provider;
         private readonly ICustomCommandsTool _customCommandsTool;
+        private readonly EventGroupFinderTool _eventGroupFinderTool;
 
-        public CommandFactory(IServiceProvider provider, ICustomCommandsTool customCommandsTool)
+        public CommandFactory(IServiceProvider provider, ICustomCommandsTool customCommandsTool, EventGroupFinderTool eventGroupFinderTool)
         {
             _provider = provider;
             _customCommandsTool = customCommandsTool;
+            _eventGroupFinderTool = eventGroupFinderTool;
         }
 
         public async Task<Command> GetCommand(string messageText)
@@ -41,7 +43,10 @@ namespace GroupmeBot.Data.Commands
                 }
             }
 
-            return await TryGetCustomCommands(messageText);    
+            var customGroupTag = await TryGetEventGroupTag(messageText);
+            if (customGroupTag != null) return customGroupTag;
+
+            return await TryGetCustomCommands(messageText);
         }
 
         private List<ProgrammedCommand> GetAllAvailableProgrammedCommands()
@@ -67,6 +72,25 @@ namespace GroupmeBot.Data.Commands
 
             var result = new CustomCommand(matchingCommand.CommandResponse);
             return result;
+        }
+
+        private async Task<EventTagCommand> TryGetEventGroupTag(string text)
+        {
+            if (!text.StartsWith('@')) return null;
+
+            // Now that we know it starts with @, strip it - we don't need it anymore
+            var result = (EventTagCommand)ActivatorUtilities.CreateInstance(_provider, typeof(EventTagCommand));
+            result =
+
+            text = text.Substring(1);
+
+            var membersToTag = await _eventGroupFinderTool.TryGetMembersOfEvent(text);
+
+            if (membersToTag != null) return new EventTagCommand(membersToTag);
+
+            // Check to see if the name of the groups match that of the @
+            // If so, use the GroupmeTool to build @'s for those people
+            return null;
         }
     }
 }

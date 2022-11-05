@@ -55,12 +55,13 @@ namespace GroupmeBot.Api
             services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
             services.AddScoped<IBotTool, BotTool>();
             services.AddScoped<ITextTool, TextTool>();
-            services.AddScoped<IGroupmeTool, GroupmeTool>();
+            services.AddScoped<GroupmeTool>();
             services.AddScoped<IAwardsTool, AwardsTool>();
             services.AddScoped<IThesaurusTool, ThesaurusTool>();
             services.AddScoped<ITwitchTool, TwitchTool>();
             services.AddScoped<ICustomCommandsTool, CustomCommandsTool>();
             services.AddScoped<IWordleTool, WordleTool>();
+            services.AddScoped<EventGroupFinderTool>();
 
             // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });

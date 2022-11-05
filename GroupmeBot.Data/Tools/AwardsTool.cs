@@ -9,11 +9,11 @@ namespace GroupmeBot.Data.Tools
 {
     public class AwardsTool : IAwardsTool
     {
-        private readonly IGroupmeTool _gmeTool;
+        private readonly GroupmeTool _gmeTool;
         private readonly int startOfDayHour = 4;
 
 
-        public AwardsTool(IGroupmeTool gmeTool)
+        public AwardsTool(GroupmeTool gmeTool)
         {
             _gmeTool = gmeTool;
         }
