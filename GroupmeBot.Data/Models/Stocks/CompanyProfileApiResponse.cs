@@ -6,7 +6,7 @@ namespace GroupmeBot.Data.Models.Stocks
     /// <summary>
     /// https://finnhub.io/api/v1/stock/profile2
     /// </summary>
-    public class CompanyProfileResponse
+    public class CompanyProfileApiResponse
     {
         [JsonPropertyName("country")]
         public string CountryCode { get; set; }
