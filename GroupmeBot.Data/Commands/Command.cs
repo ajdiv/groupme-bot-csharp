@@ -1,11 +1,13 @@
-﻿using GroupmeBot.Data.Constants;
-using GroupmeBot.Data.Models.GroupMe;
+﻿using GroupmeBot.Data.Models.GroupMe;
+using System;
 using System.Threading.Tasks;
 
 namespace GroupmeBot.Data.Commands
 {
     public abstract class Command
     {
-        public abstract Task<GroupmeBotResponseModel> Execute();
+        public virtual Task<GroupmeBotResponseModel> Execute(string message) { return Execute(); }
+
+        public virtual Task<GroupmeBotResponseModel> Execute() { throw new NotImplementedException(); }
     }
 }

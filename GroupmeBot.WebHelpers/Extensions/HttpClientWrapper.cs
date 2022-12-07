@@ -18,6 +18,22 @@ namespace GroupmeBot.WebHelpers.Extensions
             _httpClientFactory = clientFactory;
         }
 
+        public async Task<T> Get<T>(string url)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            var response = await client.GetStreamAsync(url);
+            try
+            {
+                var result = await JsonSerializer.DeserializeAsync<T>(response);
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<T> Get<T>(string url, string accessToken)
         {
             var client = _httpClientFactory.CreateClient();
