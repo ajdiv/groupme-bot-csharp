@@ -19,14 +19,20 @@ namespace GroupmeBot.Data.Tools
             _client = client;
         }
 
-        public async Task<bool> IsSymbolValid(string ticker)
+
+        public async Task<Metric> GetBasicFinancials(string ticker)
+        {
+            var url = $"{_finnhubUrl}stock/metric?symbol={ticker}&metric=all&token={_settings.ApiKey}";
+            var results = await _client.Get<BasicFinancialsApiResponse>(url);
+            return results?.Data;
+        }
+
+        public async Task<CompanyProfileApiResponse> GetCompanyData(string ticker)
         {
             var url = $"{_finnhubUrl}stock/profile2?symbol={ticker}&token={_settings.ApiKey}";
 
-            CompanyProfileResponse results;
-
-            results = await _client.Get<CompanyProfileResponse>(url);
-            return results.Ticker != null;
+            var results = await _client.Get<CompanyProfileApiResponse>(url);
+            return results;
         }
 
         public async Task<QuoteApiResponse> GetDailyStatus(string ticker)
