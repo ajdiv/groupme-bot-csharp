@@ -34,7 +34,7 @@ namespace GroupmeBot.Data.Tools
 
                 if (command != null)
                 {
-                    var results = await command.Execute();
+                    var results = await command.Execute(message.Text);
                     await SendMessage(results);
                 }
                 else if (WordleSubmissionModel.TryParse(message.Text, out WordleSubmissionModel validSubmission))
@@ -60,6 +60,8 @@ namespace GroupmeBot.Data.Tools
 
         private async Task SendMessage(GroupmeBotResponseModel model)
         {
+            if (model == null) return;
+
             model.BotId = _botDetails.BotApiKey;
             await _client.Post(_gmePostAddress, model);
         }
