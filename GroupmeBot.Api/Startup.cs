@@ -1,6 +1,7 @@
 using GroupmeBot.Data.Commands;
 using GroupmeBot.Data.Models.GroupMe;
 using GroupmeBot.Data.Models.Site;
+using GroupmeBot.Data.Models.Stocks;
 using GroupmeBot.Data.Models.Thesaurus;
 using GroupmeBot.Data.Mongo;
 using GroupmeBot.Data.Mongo.Repositories;
@@ -40,9 +41,10 @@ namespace GroupmeBot.Api
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            // Configure and register "secrets" object 
+            // Configure and register "secrets" objects
             services.Configure<GroupmeBotAccountDetails>(Configuration.GetSection("GroupmeCreds"));
             services.Configure<ThesaurusAccountDetails>(Configuration.GetSection("ThesaurusCreds"));
+            services.Configure<StockSettings>(Configuration.GetSection("Stock"));
             services.Configure<SiteDetails>(Configuration.GetSection("SiteCreds"));
             services.Configure<MongoSettings>(Configuration.GetSection("DatabaseSettings"));
 
@@ -61,6 +63,7 @@ namespace GroupmeBot.Api
             services.AddScoped<ITwitchTool, TwitchTool>();
             services.AddScoped<ICustomCommandsTool, CustomCommandsTool>();
             services.AddScoped<IWordleTool, WordleTool>();
+            services.AddScoped<StockTool>();
 
             // Add ability to parse JSON to C# enums
             services.AddControllers().AddJsonOptions(x => { x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
