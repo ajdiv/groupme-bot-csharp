@@ -43,6 +43,7 @@
 
         private static bool StringIsFraction(string input)
         {
+            if(string.IsNullOrEmpty(input)) return false;
             var validFirstChar = (char.GetNumericValue(input, 0) >= 1 && char.GetNumericValue(input, 0) <= 6) || input[0] == 'x';
             var validSecondChar = input[1] == '/';
             var validThirdChar = char.GetNumericValue(input, 2) == 6;

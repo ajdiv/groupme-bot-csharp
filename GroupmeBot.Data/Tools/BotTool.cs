@@ -30,6 +30,7 @@ namespace GroupmeBot.Data.Tools
         {
             if (message.SenderType == GroupmeSenderType.User && !string.IsNullOrWhiteSpace(message.Text))
             {
+                Console.WriteLine($"Received message: {message.Text} from {message.Nickname} at {message.CreatedAt}");
                 var command = await _cmdFactory.GetCommand(message.Text.Trim().ToLower());
 
                 if (command != null)
