@@ -30,6 +30,7 @@ namespace GroupmeBot.Data.Tools
         {
             if (message.SenderType == GroupmeSenderType.User && !string.IsNullOrWhiteSpace(message.Text))
             {
+                Console.WriteLine($"Received message: {message.Text} from {message.Nickname}");
                 var command = await _cmdFactory.GetCommand(message.Text.Trim().ToLower());
 
                 if (command != null)
@@ -63,6 +64,7 @@ namespace GroupmeBot.Data.Tools
             if (model == null) return;
 
             model.BotId = _botDetails.BotApiKey;
+            Console.WriteLine($"Sending message: {model.Text}");
             await _client.Post(_gmePostAddress, model);
         }
     }
